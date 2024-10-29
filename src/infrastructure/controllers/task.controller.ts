@@ -4,10 +4,15 @@ import { Task } from 'src/domain/model/task.model';
 @Controller('tasks')
 export class TaskController{
     @Get()
-    getTasks() : Task[] {
-        return[
+    getTasks() : any[] {
+        const tasks: Task[] = [
             { id: 1, name: 'Task 1', dueDate: new Date('2024-10-29'), status: true },
             { id: 2, name: 'Task 2', dueDate: new Date('2024-10-29'), status: false },
-        ]
+        ];
+
+        return tasks.map(tasks => ({
+            ...tasks,
+                status: tasks.status ? 'Complete' : 'Incomplete'
+        }));
     }
 }
